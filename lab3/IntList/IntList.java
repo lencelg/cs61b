@@ -267,6 +267,9 @@ public class IntList {
         return out.toString();
     }
     public static IntList reverse(IntList A){
+        if (A==null){
+            return null;
+        }
         IntList first=null;
         IntList rest=A;
         while(rest.rest!=null){
