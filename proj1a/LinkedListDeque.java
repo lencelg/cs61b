@@ -24,7 +24,9 @@ public class LinkedListDeque<T> {
         size++;
         if (flag){
             tail = head;
+            return;
         }
+        head.next.prev=head;
     }
     public void addLast(T item){
         boolean flag= head == null;
@@ -62,27 +64,30 @@ public class LinkedListDeque<T> {
         }
         T res = head.data;
         head = head.next;
-        if (size==1){
-            tail=head;
+        if (size == 1){
+            tail = head;
         }
         size--;
+        head.prev=null;
         return res;
     }
     public T removeLast(){
         if (tail == null){
             return null;
         }
-        Node temp = tail;
-        T res = temp.data;
+        T res = tail.data;
         tail = tail.prev;
-        temp = null;
         if (size==1){
             head=tail;
         }
         size--;
+        tail.next=null;
         return res;
     }
     public T get(int index){
+        if (index<0 || index>size){
+            return null;
+        }
         Node temp = head;
         for (int i = 0;i < index;i++){
             temp = temp.next;
@@ -90,12 +95,15 @@ public class LinkedListDeque<T> {
         return temp.data;
     }
     public T getRecursive(int index){
+        if (index<0 || index>size){
+            return null;
+        }
         return getRecursive(head,index);
     }
     private T getRecursive(Node head,int index){
         if(index == 0){
             return head.data;
         }
-        return getRecursive(head.next,--index);
+        return getRecursive(head.next,index-1);
     }
 }
