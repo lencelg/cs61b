@@ -62,12 +62,13 @@ public class LinkedListDeque<T> {
         if (head == null){
             return null;
         }
+        size--;
         T res = head.data;
         head = head.next;
-        if (size == 1){
+        if (size == 0){
             tail = head;
+            return res;
         }
-        size--;
         head.prev=null;
         return res;
     }
@@ -75,12 +76,13 @@ public class LinkedListDeque<T> {
         if (tail == null){
             return null;
         }
+        size--;
         T res = tail.data;
         tail = tail.prev;
-        if (size==1){
+        if (size==0){
             head=tail;
+            return res;
         }
-        size--;
         tail.next=null;
         return res;
     }
