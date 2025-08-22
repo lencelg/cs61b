@@ -8,70 +8,72 @@ public class LinkedListDeque<T>{
     private Node head;
     private Node tail;
     public LinkedListDeque(){
-       size=0;
-       head=null;
-       tail=null;
+       size = 0;
+       head = null;
+       tail = null;
     }
     public void addFirst(T item){
         boolean flag= head == null;
         Node newnode = new Node();
-        newnode.data=item;
-        newnode.prev=null;
-        newnode.next=head;
-        head=newnode;
+        newnode.data = item;
+        newnode.prev = null;
+        newnode.next = head;
+        head = newnode;
         size++;
         if (flag){
-            tail=head;
+            tail = head;
         }
     }
     public void addLast(T item){
         boolean flag= head == null;
-        Node newnode=new Node();
-        newnode.data=item;
-        newnode.prev=tail;
-        newnode.next=null;
+        Node newnode = new Node();
+        newnode.data = item;
+        newnode.prev = tail;
+        newnode.next = null;
         size++;
         if (flag){
-            tail=newnode;
-            head=tail;
+            tail = newnode;
+            head = tail;
             return;
         }
-        tail.next=newnode;
-        tail=newnode;
+        tail.next = newnode;
+        tail = newnode;
     }
     public boolean isEmpty(){return size==0;}
     public int size(){return size;}
     public void printDeque(){
-        Node temp=head;
-        while(temp!=null){
+        Node temp = head;
+        while(temp.next!=null){
             System.out.println(temp.data);
             System.out.println(" ");
             temp=temp.next;
         }
+        System.out.println((temp.data));
     }
     public T removeFirst(){
         if (head==null){
             return null;
         }
-        T res=head.data;
-        head=head.next;
+        T res = head.data;
+        head = head.next;
         size--;
         return res;
     }
     public T removeLast(){
-        if (tail==null){
+        if (tail == null){
             return null;
         }
-        T res=tail.data;
-        tail=tail.prev;
-        tail.next=null;
+        Node temp = tail;
+        T res = temp.data
+        tail = tail.prev;
+        temp = null;
         size--;
         return res;
     }
     public T get(int index){
-        Node temp=head;
-        for (int i=0;i<index;i++){
-            temp=temp.next;
+        Node temp = head;
+        for (int i = 0;i < index;i++){
+            temp = temp.next;
         }
         return temp.data;
     }
