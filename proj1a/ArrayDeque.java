@@ -86,14 +86,20 @@ public class ArrayDeque<T>{
         return size==0;
     }
     public void addLast(T item){
-        resize();
-        curtail=(curtail+1)%capacity;
-        array[curtail] = item;
+        if (isEmpty()){
+            array[curtail]=item;
+            curhead=curtail;
+        }else {
+            resize();
+            curtail = (curtail + 1) % capacity;
+            array[curtail] = item;
+        }
         size++;
     }
     public void addFirst(T item){
         if (isEmpty()){
             array[curhead]=item;
+            curtail=curhead;
         }else {
             resize();
             if (curhead == 0 ){

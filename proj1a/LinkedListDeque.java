@@ -1,4 +1,6 @@
-public class LinkedListDeque<T>{
+
+public class LinkedListDeque<T> {
+
     private class Node{
         public T data;
         public Node next;
@@ -60,6 +62,9 @@ public class LinkedListDeque<T>{
         }
         T res = head.data;
         head = head.next;
+        if (size==1){
+            tail=head;
+        }
         size--;
         return res;
     }
@@ -71,6 +76,9 @@ public class LinkedListDeque<T>{
         T res = temp.data;
         tail = tail.prev;
         temp = null;
+        if (size==1){
+            head=tail;
+        }
         size--;
         return res;
     }
