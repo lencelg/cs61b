@@ -11,36 +11,50 @@ public class ArrayDeque<T>{
         curhead = 0;
         curtail = 0;
     }
-    private void resize(){
-        if (size/capacity < 0.25){
-            capacity = capacity/2;
+    private void resize() {
+        if ((double)size /capacity < 0.25 && capacity >= 16){
             T[] newitem = (T [])new Object[capacity];
-            for (int i = curhead,j = 0;i < size;i++,j++){
+            for (int i = curhead,j = 0;j < size;j++){
                 newitem[j] = array[i];
+                i = (i+1)%capacity;
             }
+            capacity = capacity/2;
+            newitem[size-1] = array[curtail];
             array = newitem;
+            curhead=0;
+            curtail=size-1;
             return;
         }
         if(size+1 > capacity){
-            capacity = capacity*2;
-            T[] newitem = (T [])new Object[capacity];
-            for (int i = curhead,j = 0;i < size;i++,j++){
+            T[] newitem = (T [])new Object[capacity*2];
+            for (int i = curhead,j = 0; j < size ;j++){
                 newitem[j] = array[i];
+                i=(i+1)%capacity;
+
             }
+            capacity = capacity*2;
+            newitem[size-1] = array[curtail];
             array = newitem;
+            curhead=0;
+            curtail=size-1;
             return;
         }
     }
     public T get(int index){
-        return array[index];
+        return array[(curhead+index)%capacity];
     }
     public T removeLast(){
         if (isEmpty()){
             return null;
         }
         T res = array[curtail];
-        array[curtail] = null;
-        curtail=(curtail-1)%capacity;
+        if(curtail == 0){
+            curtail = capacity-1;
+        }else if (curhead == curtail){
+           // case for size==1 , do nothing
+        }else {
+            curtail = (curtail - 1) % capacity;
+        }
         size--;
         resize();
         return res;
@@ -51,7 +65,8 @@ public class ArrayDeque<T>{
         }
         size--;
         T res = array[curhead];
-        curhead =(curhead+1)%capacity;
+        array[curhead]=null;
+        curhead = (curhead+1)%capacity;
         resize();
         return res;
     }
@@ -72,13 +87,22 @@ public class ArrayDeque<T>{
     }
     public void addLast(T item){
         resize();
-        array[size] = item;
+        curtail=(curtail+1)%capacity;
+        array[curtail] = item;
         size++;
     }
     public void addFirst(T item){
-        resize();
-        curhead = (curhead-1)%capacity;
-        array[curhead] = item;
+        if (isEmpty()){
+            array[curhead]=item;
+        }else {
+            resize();
+            if (curhead == 0 ){
+                curhead = capacity-1;
+            }else {
+                curhead = (curhead - 1) % capacity;
+            }
+            array[curhead] = item;
+        }
         size++;
     }
 }
