@@ -10,24 +10,23 @@ public class TestOffByOne {
     // Your tests go here.
     @Test
     public void testOffByOne(){
-        OffByOne obo=new OffByOne();
         // biodirectional test
-        assertTrue(obo.equalChars('a', 'b'));
-        assertTrue(obo.equalChars('b', 'a'));
+        assertTrue(offByOne.equalChars('a', 'b'));
+        assertTrue(offByOne.equalChars('b', 'a'));
         // common char test
-        assertFalse(obo.equalChars('a', 'e'));
+        assertFalse(offByOne.equalChars('a', 'e'));
         // non char test
-        assertFalse(obo.equalChars('r', ' '));
-        assertFalse(obo.equalChars(' ', ' '));
+        assertFalse(offByOne.equalChars('r', ' '));
+        assertFalse(offByOne.equalChars(' ', ' '));
         // upper char test
-        assertFalse(obo.equalChars('Z', 'A'));
-        assertTrue(obo.equalChars('B', 'A'));
-        assertTrue(obo.equalChars('A','B'));
+        assertFalse(offByOne.equalChars('Z', 'A'));
+        assertTrue(offByOne.equalChars('B', 'A'));
+        assertTrue(offByOne.equalChars('A','B'));
         // lower char and upper char test
-        assertFalse(obo.equalChars('B', 'a'));
+        assertFalse(offByOne.equalChars('B', 'a'));
         // same char test
-        assertFalse(obo.equalChars('a', 'a'));
+        assertFalse(offByOne.equalChars('a', 'a'));
         // general char test
-        assertTrue(obo.equalChars('&', '%'));
+        assertTrue(offByOne.equalChars('&', '%'));
     }
 }
