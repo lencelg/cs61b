@@ -11,10 +11,23 @@ public class TestOffByOne {
     @Test
     public void testOffByOne(){
         OffByOne obo=new OffByOne();
+        // biodirectional test
         assertTrue(obo.equalChars('a', 'b'));
-        assertTrue(obo.equalChars('r', 'q'));
-        assertFalse(obo.equalChars('z', 'a'));
-        assertFalse(obo.equalChars('a', 'a'));
+        assertTrue(obo.equalChars('b', 'a'));
+        // common char test
         assertFalse(obo.equalChars('a', 'e'));
+        // non char test
+        assertFalse(obo.equalChars('r', ' '));
+        assertFalse(obo.equalChars(' ', ' '));
+        // upper char test
+        assertFalse(obo.equalChars('Z', 'A'));
+        assertTrue(obo.equalChars('B', 'A'));
+        assertTrue(obo.equalChars('A','B'));
+        // lower char and upper char test
+        assertFalse(obo.equalChars('B', 'a'));
+        // same char test
+        assertFalse(obo.equalChars('a', 'a'));
+        // general char test
+        assertTrue(obo.equalChars('&', '%'));
     }
 }
